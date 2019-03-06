@@ -3,8 +3,7 @@ import inspect
 from etl.etl_register import ETLBase, ETLRegistryHolder
 from etl.etl_register import ETLCrawler, ETLCrawlerRegistryHolder
 
-from etl.fund import *
-from etl.economy import *
+from etl import *
 
 def _get_classes(register):
     """call register get_registry()

@@ -18,7 +18,7 @@ from airflow.operators.python_operator import (BranchPythonOperator,
                                                ShortCircuitOperator)
 from airflow.utils.dates import cron_presets
 from airflow.utils.helpers import chain
-from etl.etl_utils import get_registered_etl, get_registered_etl_from_name
+from utils.etl_utils import get_registered_etl, get_registered_etl_from_name
 from pendulum import datetime
 from sqlalchemy import desc, or_
 
