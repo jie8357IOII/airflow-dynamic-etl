@@ -14,7 +14,6 @@ SEASONALLY_DELAY = 604800  # 7 days
 YEARLY_DELAY = 604800  # 7 days
 MAX_DELAY = 604800  # 7 days
 
-
 def add_task(task_type, task_priority):
     def decorator(func):
         @wraps(func)
@@ -275,7 +274,7 @@ class ETLCrawler(ETLBase):
         except Exception as e:
             return None
 
-    def pre_load(self, file_name=None, *args, **kwargs):
+    def pre_load(self, file_dir,file_name=None, *args, **kwargs):
         """load transformed data        
 
         retrive data which produce from transform step
@@ -290,17 +289,17 @@ class ETLCrawler(ETLBase):
             collections.Iterable: row from file reader
         """
         filename = os.path.join(
-            PARSER_CSV_PATH, self.get_class_name() + '.csv')
+            file_dir, self.get_class_name() + '.csv')
         if file_name:
             filename = os.path.join(
-                PARSER_CSV_PATH, file_name + '.csv')
+                file_dir, file_name + '.csv')
         with open(filename, 'rb') as csvfile:
             reader = csv.reader(csvfile, encoding='utf-8',
                                 delimiter='|', quoting=csv.QUOTE_NONE, escapechar='\\')
             for row in reader:
                 yield [x or None for x in row]
 
-    def write_csv(self, file, file_name=None, *args, **kwargs):
+    def write_csv(self, file, file_dir,file_name=None, *args, **kwargs):
         """write data which encoding with utf-8
 
         file should be csv form.
@@ -313,10 +312,10 @@ class ETLCrawler(ETLBase):
                              default is None
         """
         filename = os.path.join(
-            PARSER_CSV_PATH, self.get_class_name() + '.csv')
+            file_dir, self.get_class_name() + '.csv')
         if file_name:
             filename = os.path.join(
-                PARSER_CSV_PATH, file_name + '.csv')
+                file_dir, file_name + '.csv')
         with open(filename, 'wb') as wfile:
             wr = csv.writer(wfile, encoding='utf-8',
                             delimiter='|',
