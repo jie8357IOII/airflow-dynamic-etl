@@ -1,18 +1,18 @@
+import errno
 import logging
+import os
 import random
 import sys
 import time
-import errno
-import os
 import requests
 import requests.exceptions
 from bs4 import BeautifulSoup
 from etl_register import ETLCrawler
 
 logger = logging.getLogger(__name__)
-
-NEW_YORK_TIMES_ECONOMY_RAW_PATH =  os.path.join('data','nyt_economy')
-PARSER_CSV_PATH = os.path.join('data','parser_csv')
+FILE_ROOT = "/home/airflow/gcs"
+NEW_YORK_TIMES_ECONOMY_RAW_PATH =  os.path.join(FILE_ROOT, 'data','nyt_economy')
+PARSER_CSV_PATH = os.path.join(FILE_ROOT, 'data','parser_csv')
 URL_NEWS_NEW_YORK_TIMES_ECONOMY = 'https://www.nytimes.com/section/business/economy'
 
 def mkdir_p(path):
